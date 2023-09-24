@@ -1,4 +1,4 @@
-![Logo](https://github.com/Rasshua/html_parcer/blob/main/assets/logo_.png)
+![Logo](https://github.com/Rasshua/html_parser/blob/e30ad9833fd039225dccecb03af3e97c6b9de2e0/assets/logo_.png)
 
 # HTML Parser
 
@@ -21,3 +21,11 @@ The latest version of the parser:
 - lists the main tags for links
 - lists the main tags for buttons
 
+## Prerequisites
+
+- Download and install Python IDE
+- Install the module BeautifulSoup
+
+## Usage
+
+python ./parcer_land.py <Website URL>
