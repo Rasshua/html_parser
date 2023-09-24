@@ -16,10 +16,31 @@ OG = {
     'Twi image :':"twitter:image"
 }
 
+# Return the get_attr value from name tag with attr
+# 
+def get_tag(name, attr, get_attr):
+    data = soup.find(name, attrs=attr)
+    try:
+        data = data.get(get_attr)
+    except:
+        data = None
+    return(data)
+
+# Return the get_attr value from name tag with attr
+# 
+def get_text(name):
+    # data = soup.find('title').text
+    data = soup.find(name)
+    try:
+        data = data.text
+    except:
+        data = None
+    return(data)
+
 def Sec_header(h_name):
     l = ""
     for i in range(0, len(h_name)):
-        l = l + "="
+        l += "="
     print(h_name)
     print(l)
 
@@ -55,53 +76,35 @@ Sec_header('Response code : ' + str(r.status_code))
 soup = bs(r.text, 'lxml')
 
 # Canonical string checking
-# data = soup.find('link', rel='canonical').get('href')
-data = soup.find('link', attrs={'rel': 'canonical'})
-try:
-    data = data.get('href')
-except:
-    data = None
+data = get_tag('link', {'rel': 'canonical'}, 'href')
 print('Webpage   : ' + url)
 print('Canonical : ' + str(data))
 
 print('')
 
 # <title> checking
-data = soup.find('title').text
-print('<title>   : ' + data)
+# data = soup.find('title').text
+data = get_text('title')
+print('<title>   : ' + str(data))
 
 print('')
 
 # <meta description> checking
-data = soup.find('meta', attrs={'name': 'description'})
-try:
-    data = data.get('content')
-except:
-    data = None
+data = get_tag('meta', {'name': 'description'}, 'content')
 print('<meta description> tag : ' + str(data))
 
 print('')
 
 # <meta robots> checking
-data = soup.find('meta', attrs={'name': 'robots'})
-try:
-    data = data.get('content')
-except:
-    data = None
-print('Robots : ' + str(data))
+data = get_tag('meta', {'name': 'robots'}, 'content')
+print('<meta robots> tag : ' + str(data))
 
 print('')
 
 # Open Graph markup checking
 Sec_header('Open Graph markup')
-# for i in OG.keys():
-#     print(i, soup.find('meta', property=OG.get(i)).get('content'))
 for i in OG.keys():
-    data = soup.find('meta', attrs={'property': OG.get(i)})
-    try:
-        data = data.get('content')
-    except:
-        data = None
+    data = get_tag('meta', {'property': OG.get(i)}, 'content')
     print(i, str(data))
 
 print('')
@@ -119,10 +122,7 @@ for i in data:
     h = i.get('height')
     lazy = i.get('loading')
     alt = i.get('alt')
-    alt = Trunc_str(alt, 31)
-    # if len(alt) > 31:
-    #     alt = alt[:-(len(alt) - 31)]
-    #     alt += '>'
+    alt = Trunc_str(str(alt), 31)
     src = i.get('src')
     srcset = i.get('srcset')
     count += 1
@@ -145,7 +145,7 @@ for i in data:
     rel = i.get('rel')
     target = i.get('target')
     href = i.get('href')
-    text = Trunc_str(text, 17)
+    text = Trunc_str(str(text), 17)
     aria = Trunc_str(str(aria), 17)
     print(format % (text, aria, str(rel), str(target), str(href)))
     count += 1
@@ -164,7 +164,7 @@ for i in data:
     text = i.text
     aria = i.get('aria-label')
     type = i.get('type')
-    text = Trunc_str(text, 27)
+    text = Trunc_str(str(text), 27)
     aria = Trunc_str(str(aria), 27)
     print(format % (text, aria, str(type)))
     count += 1
