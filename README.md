@@ -32,4 +32,4 @@ python ./parcer_land.py _Website URL_
 
 ## Usage example
 
-[Screenshot](https://github.com/Rasshua/html_parser/blob/e30ad9833fd039225dccecb03af3e97c6b9de2e0/assets/logo_.png)
+[Screenshot](https://github.com/Rasshua/html_parser/blob/9bd40aec378cdc122fdb9d40dfe848f1477ffdc3/assets/Screenshot_3.png)
