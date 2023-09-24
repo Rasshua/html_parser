@@ -28,7 +28,7 @@ The latest version of the parser:
 
 ## Usage
 
-python ./parcer_land.py _Website URL_
+`python ./parcer_land.py _Website URL_`
 
 ## Usage example
 
