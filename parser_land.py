@@ -18,7 +18,7 @@ TWI = {
     'Twitter descr       :':"twitter:description",
     'Twitter image       :':"twitter:image",
     'Twitter image width :':"twitter:image:width",
-    'Twitter image heigh :':"twitter:image:heigh",
+    'Twitter image height:':"twitter:image:height",
     'Twitter image alt   :':"twitter:image:alt",
     'Twitter URL         :':"twitter:url"
 }
