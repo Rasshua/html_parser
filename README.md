@@ -24,7 +24,13 @@ The latest version of the parser:
 ## Prerequisites
 
 - Download and install Python IDE
-- Install the module BeautifulSoup
+- Install the modules mentioned below and their prerequisites from the Python Package Index:
+
+```bash
+python -m pip install bs4
+python -m pip install requests
+python -m pip install sys
+```
 
 ## Usage
 

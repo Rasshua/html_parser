@@ -4,16 +4,23 @@ import sys
 
 r_headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"}
 OG = {
-    'OG type  :':"og:type",
-    'OG URL   :':"og:url",
-    'OG title :':"og:title",
-    'OG descr :':"og:description",
-    'OG image :':"og:image",
-    'Twi card  :':"twitter:card",
-    'Twi URL   :':"twitter:url",
-    'Twi title :':"twitter:title",
-    'Twi descr :':"twitter:description",
-    'Twi image :':"twitter:image"
+    'OG type      :':"og:type",
+    'OG title     :':"og:title",
+    'OG descr     :':"og:description",
+    'OG URL       :':"og:url",
+    'OG Site Name :':"og:site_name",
+    'OG Locale    :':"og:locale",
+    'OG image     :':"og:image"
+}
+TWI = {
+    'Twitter card        :':"twitter:card",
+    'Twitter title       :':"twitter:title",
+    'Twitter descr       :':"twitter:description",
+    'Twitter image       :':"twitter:image",
+    'Twitter image width :':"twitter:image:width",
+    'Twitter image heigh :':"twitter:image:heigh",
+    'Twitter image alt   :':"twitter:image:alt",
+    'Twitter URL         :':"twitter:url"
 }
 
 # Return the get_attr value from name tag with attr
@@ -56,8 +63,8 @@ def total_count(count):
 # url = "https://uxuidesign.m.goit.global/ua/course/2/"
 # url = "https://test-qa.softryzen.com/" - from my test task, lot of errors
 # url = "https://startpagetest.lp.goit.global/ua/dev/"
-# url = "https://startpagetest.lp.goit.global/ua/"
-# url = "https://softryzen.goit.global/test-quiz/" - strange webpage, unusual behavior on run
+# url = "https://doctor-voitsitskyi.com.ua/uk"
+
 
 #Getting the URL from 1st parameter of the command string
 try:
@@ -106,6 +113,10 @@ Sec_header('Open Graph markup')
 for i in OG.keys():
     data = get_tag('meta', {'property': OG.get(i)}, 'content')
     print(i, str(data))
+print('------------')
+for i in TWI.keys():
+    data = get_tag('meta', {'name': TWI.get(i)}, 'content')
+    print(i, str(data))
 
 print('')
 
@@ -125,9 +136,12 @@ for i in data:
     alt = Trunc_str(str(alt), 31)
     src = i.get('src')
     srcset = i.get('srcset')
-    count += 1
     print(format % (str(w), str(h), str(lazy), str(alt), str(src)))
     print(format % (' ', ' ', ' ', ' ', str(srcset)))
+    # print ('')
+    count += 1
+if count == 0:
+    print('     << No content images on the webpage >>')
 total_count(str(count))
 
 print('')
@@ -149,6 +163,8 @@ for i in data:
     aria = Trunc_str(str(aria), 17)
     print(format % (text, aria, str(rel), str(target), str(href)))
     count += 1
+if count == 0:
+    print('     << No links on the webpage >>')
 total_count(str(count))
 
 print('')
@@ -168,20 +184,9 @@ for i in data:
     aria = Trunc_str(str(aria), 27)
     print(format % (text, aria, str(type)))
     count += 1
+if count == 0:
+    print('     << No buttons on the webpage >>')
 total_count(str(count))
 
 print('')
-
-# print(r.content)
-
-# soup = bs(r.text, 'lxml')
-
-# data = soup.find_all('div', class_="w-full rounded border")
-
-# for i in data:
-#     name = i.find('h4').text.replace("\n", "")
-#     price = i.find('h5').text
-#     url_img = "https://scrapingclub.com" + i.find('img', class_='card-img-top img-fluid').get('src')
-
-#     print('\n' + name + '\n' + price + '\n' + url_img + '\n')
 
